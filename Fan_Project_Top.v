@@ -33,20 +33,20 @@ module Fan_Project(
     wire timeout;
     wire motor_reset;
     assign motor_reset = reset_p ? 1 : timeout ? 1 : 0;
-    //1¹ø : ¸ğÅÍ PWM Á¦¾î
+    //1ë²ˆ : ëª¨í„° PWM ì œì–´
     dcmotor_pwm_project2 demotor(.clk(clk), .reset_p(motor_reset), .btn(btn[0]), .pwmpin_1(pwmpin_1), .led_bar(led_bar[7:4]));
 
-    //2¹ø : LED ¹à±â PWM Á¦¾î
+    //2ë²ˆ : LED ë°ê¸° PWM ì œì–´
     LED_PWM_Project2 led(.clk(clk), .reset_p(motor_reset), .btn(btn[1]), .pwmpin_2(pwmpin_2));
 
-    //3¹ø : Off Å¸ÀÌ¸Ó
+    //3ë²ˆ : Off íƒ€ì´ë¨¸
     Fan_timer_project2 timer(.clk(clk), .reset_p(reset_p), .btn(btn[2]), .led_bar(led_bar[3:0]), .com(com), .seg_7(seg_7), .timeout(timeout));
 
-    //Ãß°¡±â´É : Á¶ÀÌ½ºÆ½ADC°ªÀ¸·Î ¼­º¸¸ğÅÍ Á¦¾î
+    //ì¶”ê°€ê¸°ëŠ¥ : ì¡°ì´ìŠ¤í‹±ADCê°’ìœ¼ë¡œ ì„œë³´ëª¨í„° ì œì–´
     adc_ch6_joystick_project joystick_survo(.clk(clk), .reset_p(motor_reset), .vaux6_n(vaux6_n), .vaux6_p(vaux6_p), .pwmpin_3(pwmpin_3));
 
-    //FND¿¡´Â Å¸ÀÌ¸Ó ½Ã°£ Ãâ·ÂÇÔ
-    //Motor, LED ¸ğµâ ¾È counter¸ğµâ¿¡ reset_p¸¦ Å¸ÀÌ¸Ó°¡ ³¡³µÀ» ¶§ ³ª¿À´Â Ãâ·ÂÀÌ¶û ¹­À» °ÅÀÓ
+    //FNDì—ëŠ” íƒ€ì´ë¨¸ ì‹œê°„ ì¶œë ¥í•¨
+    //Motor, LED ëª¨ë“ˆ ì•ˆ counterëª¨ë“ˆì— reset_pë¥¼ íƒ€ì´ë¨¸ê°€ ëë‚¬ì„ ë•Œ ë‚˜ì˜¤ëŠ” ì¶œë ¥ì´ë‘ ë¬¶ì„ ê±°ì„
 endmodule
 //===========================================================================================================================//
 
